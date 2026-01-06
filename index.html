@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="UniYuni | YouTube クリエイター公式サイト" />
+  <title>UniYuni | Official</title>
+
+  <style>
+    :root{
+      --bg: #0b0c10;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --line: rgba(255,255,255,.14);
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 1080px;
+      --pad: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", "Helvetica Neue", Arial;
+      color: var(--text);
+      background:
+        radial-gradient(1000px 500px at 12% 0%, rgba(120, 90, 255, .28), transparent 55%),
+        radial-gradient(900px 500px at 90% 30%, rgba(70, 210, 255, .22), transparent 55%),
+        radial-gradient(1000px 800px at 40% 120%, rgba(255, 90, 160, .18), transparent 60%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+
+    /* Top nav */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(14px);
+      background: rgba(10,10,15,.55);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 14px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: .3px;
+    }
+    .logo{
+      width: 38px; height: 38px;
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,.95), rgba(255,255,255,.0) 35%),
+        linear-gradient(135deg, rgba(120,90,255,.95), rgba(70,210,255,.85));
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    nav ul{
+      display:flex;
+      list-style:none;
+      padding:0; margin:0;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    nav a{
+      padding: 10px 12px;
+      border-radius: 12px;
+      color: var(--muted);
+      border: 1px solid transparent;
+    }
+    nav a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
+    }
+
+    /* Hero */
+    .hero{ padding: 56px 0 26px; }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .heroMain{
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+    .heroMain:before{
+      content:"";
+      position:absolute;
+      inset:-60px -40px auto auto;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.25), transparent 60%),
+                  radial-gradient(circle at 60% 70%, rgba(70,210,255,.35), transparent 60%);
+      filter: blur(2px);
+      transform: rotate(18deg);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .kicker{
+      display:inline-flex;
+      gap: 8px;
+      align-items:center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.15;
+      letter-spacing: .2px;
+    }
+    .sub{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.7;
+      max-width: 62ch;
+    }
+    .cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: .2px;
+      min-width: 160px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.25); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(120,90,255,.95), rgba(70,210,255,.85));
+      border-color: rgba(255,255,255,.18);
+      color: rgba(10,10,14,.95);
+    }
+    .btn.primary:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+
+    .heroSide{
+      padding: 18px;
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .stat{
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+    }
+    .stat b{ display:block; font-size: 18px; margin-bottom: 4px; }
+    .stat span{ color: var(--muted); font-size: 13.5px; line-height:1.5; }
+    .pillRow{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 8px; }
+    .pill{
+      font-size: 12.5px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+    }
+
+    /* Sections */
+    section{ padding: 22px 0; }
+    .sectionTitle{
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+    .sectionTitle p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .tile{
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+    }
+    .tile h3{ margin: 0 0 8px; font-size: 15.5px; }
+    .tile p{ margin: 0; color: var(--muted); line-height: 1.7; font-size: 13.5px; }
+
+    /* Video */
+    .videoWrap{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .frame{
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: rgba(255,255,255,.03);
+    }
+    iframe{ width:100%; height:100%; border:0; }
+
+    .links{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .linkCard{
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .linkCard small{ color: var(--muted); display:block; margin-top: 3px; }
+    .linkCard .go{ color: var(--muted); font-weight: 800; }
+
+    /* Footer */
+    footer{
+      padding: 26px 0 40px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 18px;
+    }
+    .foot{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px){
+      .heroGrid, .grid3, .videoWrap{ grid-template-columns: 1fr; }
+      .btn{ min-width: 0; flex: 1; }
+    }
+
+    /* Smooth anchor offset due to sticky header */
+    :target{ scroll-margin-top: 78px; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="UniYuni Home">
+        <div class="logo" aria-hidden="true"></div>
+        <div>UniYuni</div>
+      </a>
+      <nav aria-label="Site navigation">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#videos">Videos</a></li>
+          <li><a href="#links">Links</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="heroGrid">
+        <div class="card heroMain">
+          <div class="kicker">🎧 YouTube Creator / UniYuni Official</div>
+          <h1>UniYuni<br>公式サイト</h1>
+          <p class="sub">
+            ASMR / 癒し / Vlog など、UniYuniの活動まとめ。新作や告知はここからチェックしてね。
+          </p>
+          <div class="cta">
+            <a class="btn primary" id="ytBtn" href="https://www.youtube.com/" target="_blank" rel="noopener">
+              ▶ YouTubeへ
+            </a>
+            <a class="btn" href="#videos">最新動画を見る</a>
+            <a class="btn" href="#contact">お仕事の連絡</a>
+          </div>
+        </div>
+
+        <aside class="card heroSide" aria-label="Highlights">
+          <div class="stat">
+            <b>更新情報</b>
+            <span id="statusText">ここに「投稿頻度」や「活動内容」を短く書けるよ。</span>
+            <div class="pillRow">
+              <span class="pill">ASMR</span>
+              <span class="pill">癒し</span>
+              <span class="pill">Vlog</span>
+              <span class="pill">Shorts</span>
+            </div>
+          </div>
+          <div class="stat">
+            <b>見どころ</b>
+            <span>「一番見てほしい動画」や「代表作」の案内に使うと強い。</span>
+            <div class="pillRow">
+              <span class="pill">代表作</span>
+              <span class="pill">おすすめ</span>
+              <span class="pill">告知</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="sectionTitle">
+        <h2>About</h2>
+        <p>UniYuniって何してる人？を1分で</p>
+      </div>
+      <div class="grid3">
+        <div class="tile">
+          <h3>コンセプト</h3>
+          <p>癒し・作業用・睡眠導入など、静かな時間をつくるコンテンツを中心に発信。</p>
+        </div>
+        <div class="tile">
+          <h3>活動内容</h3>
+          <p>ASMR / 自然音 / 雑談 / 旅Vlog など。気分で色々やるのも“味”。</p>
+        </div>
+        <div class="tile">
+          <h3>お知らせ</h3>
+          <p>コラボ、案件、制作依頼などは下のContactから。SNSでもOK。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="videos">
+      <div class="sectionTitle">
+        <h2>Latest Video</h2>
+        <p>動画IDを入れるだけで埋め込みできる</p>
+      </div>
+
+      <div class="videoWrap">
+        <div class="frame">
+          <!-- ▼ YouTube動画IDを差し替えてね -->
+          <iframe
+            id="ytEmbed"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
+            title="UniYuni Latest Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="links card" style="padding:14px;">
+          <div class="linkCard">
+            <div>
+              <b>おすすめ再生リスト</b>
+              <small>睡眠用 / 作業用 など</small>
+            </div>
+            <a class="go" id="playlistLink" href="#" target="_blank" rel="noopener">→</a>
+          </div>
+          <div class="linkCard">
+            <div>
+              <b>チャンネル</b>
+              <small>登録してくれると嬉しい…！</small>
+            </div>
+            <a class="go" id="channelLink" href="#" target="_blank" rel="noopener">→</a>
+          </div>
+          <div class="linkCard">
+            <div>
+              <b>告知 / X</b>
+              <small>最新の投稿とか</small>
+            </div>
+            <a class="go" id="xLink" href="#" target="_blank" rel="noopener">→</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="links">
+      <div class="sectionTitle">
+        <h2>Links</h2>
+        <p>各種SNS・配信先</p>
+      </div>
+      <div class="grid3">
+        <a class="tile" id="link1" href="#" target="_blank" rel="noopener">
+          <h3>YouTube</h3>
+          <p>最新動画・Shorts・配信はこちら。</p>
+        </a>
+        <a class="tile" id="link2" href="#" target="_blank" rel="noopener">
+          <h3>X (Twitter)</h3>
+          <p>告知・日常・裏話。更新が早い場所。</p>
+        </a>
+        <a class="tile" id="link3" href="#" target="_blank" rel="noopener">
+          <h3>お問い合わせ</h3>
+          <p>案件・コラボなどはメールへ。</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="sectionTitle">
+        <h2>Contact</h2>
+        <p>“仕事用テンプレ”も入れておくね</p>
+      </div>
+
+      <div class="card" style="padding: 18px;">
+        <p style="margin:0 0 10px; color: var(--muted); line-height:1.8;">
+          ご依頼の際は、<b>概要 / 期間 / 予算 / 公開先</b> を添えていただけるとスムーズです。
+        </p>
+        <div class="cta">
+          <a class="btn primary" id="mailBtn" href="mailto:example@uniyuni.jp?subject=UniYuni%20%E3%81%8A%E4%BB%95%E4%BA%8B%E4%BE%9D%E9%A0%BC&body=%E3%80%90%E6%A6%82%E8%A6%81%E3%80%91%0A%E3%80%90%E6%9C%9F%E9%96%93%E3%80%91%0A%E3%80%90%E4%BA%88%E7%AE%97%E3%80%91%0A%E3%80%90%E5%85%AC%E9%96%8B%E5%85%88%E3%80%91%0A%E3%80%90%E3%81%9D%E3%81%AE%E4%BB%96%E3%80%91">
+            ✉ メールで連絡
+          </a>
+          <a class="btn" href="#top">↑ トップへ</a>
+        </div>
+        <p style="margin: 12px 0 0; color: var(--muted); font-size: 12.5px;">
+          ※メールアドレスは後で差し替えてね（今はダミー）。
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap foot">
+        <div>© <span id="year"></span> UniYuni. All rights reserved.</div>
+        <div>Made with ✨ (and naps)</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // ======== ここだけ埋めれば完成（最短） ========
+    const CONFIG = {
+      // YouTubeチャンネルURL（ここを本物に置き換え）
+      youtubeChannelUrl: "https://www.youtube.com/@YOUR_CHANNEL_HANDLE",
+
+      // 最新動画のYouTube ID（例: https://www.youtube.com/watch?v=VIDEO_ID の VIDEO_ID）
+      latestVideoId: "dQw4w9WgXcQ",
+
+      // 再生リストURL（あれば）
+      playlistUrl: "https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID",
+
+      // X(Twitter)など
+      xUrl: "https://x.com/YOUR_ACCOUNT",
+
+      // 仕事用メール
+      contactEmail: "example@uniyuni.jp",
+    };
+
+    // ======== 反映処理（触らなくてOK） ========
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Buttons / Links
+    const ytBtn = document.getElementById("ytBtn");
+    const channelLink = document.getElementById("channelLink");
+    const playlistLink = document.getElementById("playlistLink");
+    const xLink = document.getElementById("xLink");
+    const link1 = document.getElementById("link1");
+    const link2 = document.getElementById("link2");
+    const link3 = document.getElementById("link3");
+    const embed = document.getElementById("ytEmbed");
+    const mailBtn = document.getElementById("mailBtn");
+
+    ytBtn.href = CONFIG.youtubeChannelUrl;
+    channelLink.href = CONFIG.youtubeChannelUrl;
+    link1.href = CONFIG.youtubeChannelUrl;
+
+    playlistLink.href = CONFIG.playlistUrl;
+    xLink.href = CONFIG.xUrl;
+    link2.href = CONFIG.xUrl;
+
+    embed.src = `https://www.youtube.com/embed/${CONFIG.latestVideoId}?rel=0`;
+
+    // mailto
+    const subj = encodeURIComponent("UniYuni お仕事依頼");
+    const body = encodeURIComponent("【概要】\n【期間】\n【予算】\n【公開先】\n【その他】\n");
+    const mailto = `mailto:${CONFIG.contactEmail}?subject=${subj}&body=${body}`;
+    mailBtn.href = mailto;
+    link3.href = mailto;
+  </script>
+</body>
+</html>
